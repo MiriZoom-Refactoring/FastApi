@@ -100,8 +100,8 @@ pipeline {
             steps {
                 build(
                     job: 'mirizoom-deploy',
-                    wait: true,
-                    propagate: true,
+                    wait: false,
+                    propagate: false,
                     parameters: [
                         string(name: 'SERVICE', value: 'fastapi'),
                         string(name: 'IMAGE_TAG', value: "${BUILD_NUMBER}")
@@ -113,7 +113,7 @@ pipeline {
 
     post {
         success {
-            echo "FastAPI 이미지 Push 및 배포 완료: ${IMAGE_NAME}:${BUILD_NUMBER}"
+            echo "FastAPI 이미지 Push 완료 및 배포 요청: ${IMAGE_NAME}:${BUILD_NUMBER}"
         }
 
         failure {
